@@ -69,6 +69,7 @@ public class JpaMain {
             //tx.commit();
 
 
+            /*
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
@@ -91,7 +92,29 @@ public class JpaMain {
                 System.out.println("m = " + m.getUsername());
             }
             System.out.println("=============");
+             */
 
+            Member m1 = new Member();
+            m1.setUsername("user1");
+            em.persist(m1);
+
+            Member m2= new Member();
+            m2.setUsername("user2");
+            em.persist(m2);
+
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, m1.getId());
+            Member referenceMember = em.getReference(Member.class, m2.getId());
+
+            //Member로 조회됨
+            System.out.println("findMember.class = " + findMember.getClass());
+            //Proxy로 조회됨
+            System.out.println("referenceMember.class = " + referenceMember.getClass());
+
+            m2.getUsername();
+            System.out.println("referenceMember.class= " + (referenceMember instanceof Member));
 
             tx.commit();
         } catch (Exception e) {
