@@ -94,6 +94,7 @@ public class JpaMain {
             System.out.println("=============");
              */
 
+            /*
             Member m1 = new Member();
             m1.setUsername("user1");
             em.persist(m1);
@@ -115,6 +116,26 @@ public class JpaMain {
 
             m2.getUsername();
             System.out.println("referenceMember.class= " + (referenceMember instanceof Member));
+             */
+
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("user1");
+            member.setTeam(team);
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+            System.out.println("findMember = " + findMember);
+
+            System.out.println("==========");
+            findMember.getTeam().getName();
+            System.out.println("==========");
 
             tx.commit();
         } catch (Exception e) {
