@@ -9,6 +9,17 @@ public class Child {
     private Long id;
     private String name;
 
+    @Embedded
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Parent parent;

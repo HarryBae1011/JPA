@@ -140,6 +140,8 @@ public class JpaMain {
             System.out.println("==========");
              */
 
+            /*
+            //cascade, orphanRemoval 적용
             Child child1 = new Child();
             Child child2 = new Child();
 
@@ -156,6 +158,11 @@ public class JpaMain {
 
             Parent findParent = em.find(Parent.class, parent.getId());
             findParent.getChildList().remove(0);
+             */
+
+            Child child = new Child();
+            child.setAddress(new Address("city", "street", "10000"));
+            em.persist(child);
 
             tx.commit();
         } catch (Exception e) {
